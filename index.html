@@ -1,16 +1,23 @@
 <html>
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <style> rect {fill: lightblue; stroke: black; }</style>
-<body>
-<svg width=300 height=300>
+<body onload='init()'>
+<svg width=1500 height=600>
 </svg>
 <script>
-var data = [4,8,15,16,23,42];
-var x = d3.scaleBand().domain([0,1,2,3,4,5]).range([0,200]);
-var y = d3.scaleLinear().domain([0,42]).range([200,0]);
-margin = 50
-height = 200
+async function init() {
+    data = await d3.csv("https://github.com/Hank-MIA/GPU-History/blob/main/NVDA.csv")
+    console.log(data)
+}
 
+margin = 50
+height = d3.select('svg').node().clientHeight
+width = d3.select('svg').node().clientWidth
+
+var data = [4,8,15,16,23,42];
+var x = d3.scaleBand().domain([0,1,2,3,4,5]).range([0,width-2*margin]);
+var y = d3.scaleLinear().domain([0,42]).range([height-2*margin,0]);
+/*
 d3.select('svg')
 .append("g")
 .attr("transform","translate("+margin+","+margin+")")
@@ -22,7 +29,7 @@ d3.select('svg')
 .attr('y',function(d,i) {return y(d);})
 .attr('width',33.3333)
 .attr('height',function(d,i) {return height-y(d);});
-
+*/
 d3.select("svg")
 .append("g")
 .attr("transform","translate("+margin+","+margin+")")
@@ -30,7 +37,7 @@ d3.select("svg")
 
 d3.select("svg")
 .append("g")
-.attr("transform","translate("+margin+","+(height+margin)+")")
+.attr("transform","translate("+margin+","+(height-margin)+")")
 .call(d3.axisBottom(x));
 
 
