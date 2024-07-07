@@ -1,45 +1,27 @@
-    body {
-        width: 1920px;
-        height: 1080px;
-        margin: 0;
-        position: relative;
-        /* Needed for absolute positioning inside */
-    }
+body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Defines two columns of equal width */
+    grid-template-rows: 1fr 1fr;
+    /* Defines two rows of equal height */
+    height: 100vh;
+    /* Full height of the viewport */
+    margin: 0;
+}
 
-    svg {
-        position: absolute;
-        width: 960px;
-        /* Half of 1920px */
-        height: 540px;
-        /* Half of 1080px */
-    }
+svg {
+    width: 100%;
+    /* Full width of the grid cell */
+    height: 100%;
+    /* Full height of the grid cell */
+}
 
-    #svg1 {
-        top: 0;
-        left: 0;
-    }
+.stock_quote {
+    stroke: steelblue;
+    fill: none;
+    stroke-width: 1.5;
+}
 
-    #svg2 {
-        top: 0;
-        left: 960px;
-    }
-
-    #svg3 {
-        top: 540px;
-        left: 0;
-    }
-
-    #svg4 {
-        top: 540px;
-        left: 960px;
-    }
-
-    .stock_quote {
-        stroke: steelblue;
-        fill: none;
-        stroke-width: 1.5;
-    }
-
-    .stock_gain {
-        opacity: 0.5;
-    }
+.stock_gain {
+    opacity: 0.5;
+}

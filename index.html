@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://d3js.org/d3.v5.js"></script>
+
 <title>NVDA History</title>
 <link href="default.css" rel="stylesheet" type="text/css">
 </head>
@@ -15,80 +16,6 @@
 </body>
 </html>
 
-<script>
-
-margin = 20
-height = d3.select('#svg1').node().clientHeight - 2 * margin
-width = d3.select('#svg1').node().clientWidth - 2 * margin
-var svg = d3.select('#svg1')
-    .append("g")
-    .attr("transform", "translate("+margin+","+margin+")");
-              
-async function init() {
-
-    daily_quotes = await d3.csv("https://hank-mia.github.io/GPU-History/NVDA.csv",
-        function(d){
-            return { date : d3.timeParse("%Y-%m-%d")(d.Date), close : parseFloat(d['Adj Close']) }
-        }
-    )
-    console.log(daily_quotes)
-
-    annual_quotes = [ { end : daily_quotes[0].date, close : daily_quotes[0].close } ]
-    for (let i = 1; i < daily_quotes.length; i++) {
-        if (daily_quotes[i].date.getFullYear() - 1 == daily_quotes[i-1].date.getFullYear()) 
-        {
-            let last_quote = annual_quotes[annual_quotes.length - 1];
-            annual_quotes.push({
-                begin : last_quote.end,
-                end : daily_quotes[i-1].date, 
-                close : daily_quotes[i-1].close, 
-                growth : (daily_quotes[i-1].close - last_quote.close) / last_quote.close * 100
-            })
-        }
-    }
-    annual_quotes = annual_quotes.slice(1)
-    console.log(annual_quotes)
-    
-    var dateAxis = d3.scaleTime()
-        .domain(d3.extent(daily_quotes, function(d) { return d.date; }))
-        .range([ 0, width ]);
-    svg.append("g")
-        .attr("transform", "translate(0,"+height+")")
-        .call(d3.axisBottom(dateAxis));
-    
-    var quoteAxis = d3.scaleLinear()
-        .domain(d3.extent(daily_quotes, function(d) { return d.close; }))
-        .range([ height, 0 ]);
-    svg.append("g")
-        .call(d3.axisLeft(quoteAxis))
-    
-    svg.append("path")
-        .datum(daily_quotes)
-        .attr("class", "stock_quote")
-        .attr("d", d3.line()
-        .x(function(d) { return dateAxis(d.date) })
-        .y(function(d) { return quoteAxis(d.close) })
-        )
-
-    var growthAxis = d3.scaleLinear()
-        .domain(d3.extent(annual_quotes, function(d) { return d.growth; }))
-        .range([ height, 0 ]);
-    svg.append("g")
-        .attr("transform", "translate("+width+",0)")
-        .call(d3.axisRight(growthAxis))
-
-    svg.selectAll('.stock_gain')  
-    .data(annual_quotes)      
-    .enter()                  
-    .append('rect')           
-    .attr('x', function(d) { return dateAxis(d.begin); })  
-    .attr('y', function(d) { return growthAxis(Math.max(0, d.growth)); }) 
-    .attr('width', function(d) { return dateAxis(d.end) - dateAxis(d.begin); })
-    .attr('height', function(d) { return Math.abs(growthAxis(d.growth) - growthAxis(0)); })
-    .attr('class', 'stock_gain')
-    .attr('fill', d => d.growth >= 0 ? 'green' : 'red'); 
-
-}
-
-
-</script>
+<script src="main.js"></script>
+<script src="svg1.js"></script>
+<script src="svg3.js"></script>
