@@ -1,4 +1,4 @@
-margin = 50
+margin = 70
 
 
 daily_quotes = []
@@ -27,12 +27,13 @@ async function init() {
     annual_quotes = annual_quotes.slice(1)
     //console.log(annual_quotes)
 
-
-    svg1 = d3.select('#svg1')
-    await loadSVG1()
+    svg2 = d3.select('#svg2')
+    await loadSVG2()
 
     svg3 = d3.select('#svg3')
-    await loadSVG3()
+    loadSVG3()
+
+    
 }
 
 

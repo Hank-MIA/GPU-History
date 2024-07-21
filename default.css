@@ -18,10 +18,21 @@ svg {
 
 .stock_quote {
     stroke: steelblue;
-    fill: none;
-    stroke-width: 1.5;
+    stroke-opacity: 1;
+    stroke-width: 2;
+    fill: steelblue;
+    fill-opacity: 0.5;
 }
 
 .stock_gain {
     opacity: 0.5;
+}
+
+.axis_label {
+    font-size: 20px;
+    fill: black;
+}
+
+.axis {
+    stroke-width: 2px;
 }
