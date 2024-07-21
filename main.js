@@ -10,7 +10,7 @@ async function init() {
             return { date: d3.timeParse("%Y-%m-%d")(d.Date), close: parseFloat(d['Adj Close']) }
         }
     )
-    //console.log(daily_quotes)
+
 
     annual_quotes = [{ end: daily_quotes[0].date, close: daily_quotes[0].close }]
     for (let i = 1; i < daily_quotes.length; i++) {
@@ -25,7 +25,9 @@ async function init() {
         }
     }
     annual_quotes = annual_quotes.slice(1)
-    //console.log(annual_quotes)
+
+    intro_container = d3.select('#intro-container')
+    await loadIntro()
 
     svg2 = d3.select('#svg2')
     await loadSVG2()

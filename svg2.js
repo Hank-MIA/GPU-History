@@ -30,7 +30,7 @@ async function loadSVG2() {
     .attr("y", 50)
     .attr("x", -height / 2)
     .attr('class', 'axis_label')
-    .text("Adjusted Stock Price (%)");
+    .text("Annual Growth Rate (%)");
 
     drawing.selectAll('.stock_gain')
         .data(annual_quotes)

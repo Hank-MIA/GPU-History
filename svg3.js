@@ -25,12 +25,13 @@ async function loadSVG3() {
         .attr("y", 60)
         .attr("x", -height / 2)
         .attr('class', 'axis_label')
-        .text("Annual Growth Rate (%)");
+        .text("Adjusted Stock Price (%)");
 
     // init path with no data
-    var line = d3.line()
+    var area = d3.area()
         .x(d => dateScale(d.date))
-        .y(d => quoteScale(d.close));
+        .y0(height)
+        .y1(d => quoteScale(d.close));
     var path = drawing.append("path")
         .attr("class", "stock_quote")
         .attr("d", area([]))
@@ -43,9 +44,9 @@ async function loadSVG3() {
 
         // Update the path with the current data
         path.datum(currentData)
-            .transition()  // Start a transition to animate the line drawing
+            .transition()  // Start a transition to animate the area drawing
             .duration(1)  // Duration of each segment's animation
-            .attr("d", line);
+            .attr("d", area);
 
         // Update the axis
         dateAxis.transition()
