@@ -40,7 +40,7 @@ li {
 }
 
 .stock_gain {
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 .axis_label {
@@ -50,4 +50,16 @@ li {
 
 .axis {
     stroke-width: 2px;
+}
+
+.chart-title {
+    font-size: 30px;
+    fill: green;
+    font-weight: bold;
+}
+
+.svg3-title {
+    font-size: 30px;
+    fill: rgb(22, 68, 129);
+    font-weight: bold;
 }

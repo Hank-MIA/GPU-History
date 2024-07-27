@@ -4,6 +4,12 @@ async function loadSVG3() {
 
     var drawing = svg3.append("g")
         .attr("transform", "translate(" + margin + "," + margin + ")");
+    
+    drawing.append("text")
+        .attr("x", width / 2)
+        .attr("text-anchor", "middle")
+        .attr("class", "svg3-title")
+        .text("Stock Price");
 
     // init scales and axis positions
     var dateScale = d3.scaleTime()
@@ -25,7 +31,7 @@ async function loadSVG3() {
         .attr("y", 60)
         .attr("x", -height / 2)
         .attr('class', 'axis_label')
-        .text("Adjusted Stock Price (%)");
+        .text("Adjusted Stock Price (USD)");
 
     // init path with no data
     var area = d3.area()

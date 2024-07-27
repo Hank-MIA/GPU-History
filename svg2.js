@@ -5,6 +5,12 @@ async function loadSVG2() {
     var drawing = svg2.append("g")
         .attr("transform", "translate(" + margin + "," + margin + ")");
 
+    drawing.append("text")
+        .attr("x", width / 2)  // Position at the center of the width
+        .attr("text-anchor", "middle")  // Center the text horizontally
+        .attr("class", "chart-title")  // Class for styling
+        .text("Annual Growth Rate");
+
     var dateAxis = d3.scaleTime()
         .domain(d3.extent(daily_quotes, function (d) { return d.date; }))
         .range([0, width]);

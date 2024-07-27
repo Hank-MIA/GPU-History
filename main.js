@@ -1,6 +1,6 @@
 margin = 70
 
-
+let clickCount = 0; 
 daily_quotes = []
 annual_quotes = []
 async function init() {
@@ -26,16 +26,27 @@ async function init() {
     }
     annual_quotes = annual_quotes.slice(1)
 
-    intro_container = d3.select('#intro-container')
-    await loadIntro()
+    document.body.addEventListener('click', function () {
+        clickCount++;
+        handleLoad(clickCount);  // Call function to handle which visualization to load
+    });
+}
 
-    svg2 = d3.select('#svg2')
-    await loadSVG2()
-
-    svg3 = d3.select('#svg3')
-    loadSVG3()
-
-    
+async function handleLoad(clickCount) {
+    switch (clickCount) {
+        case 1:
+            intro_container = d3.select('#intro-container');
+            await loadIntro();
+            break;
+        case 2:
+            svg2 = d3.select('#svg2');
+            await loadSVG2();
+            break;
+        case 3:
+            svg3 = d3.select('#svg3');
+            loadSVG3();
+            break;
+    }
 }
 
 

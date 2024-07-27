@@ -1,29 +1,33 @@
 async function loadIntro() {
+    
+    intro_container.append("h1")
+        .text("NVIDIA: A Journey Through Innovation")
+        .style("text-align", "center");
 
     function typeWriterBulletPoints(points, speed) {
-        let pointIndex = 0;  // Start with the first bullet point
+        let pointIndex = 0;
     
         function typePoint(point) {
-            let i = 0;  // Index of the current character in the bullet point
-            const ul = intro_container.append("ul");  // Append a list element to the container
-            const li = ul.append("li");  // Append a list item for the bullet point
+            let i = 0;
+            const ul = intro_container.append("ul");
+            const li = ul.append("li");
     
             function typeChar() {
                 if (i < point.length) {
-                    li.text(li.text() + point.charAt(i));  // Append next character
-                    i++;  // Increment character index
-                    setTimeout(typeChar, speed);  // Schedule next character
+                    li.text(li.text() + point.charAt(i));
+                    i++;
+                    setTimeout(typeChar, speed);
                 } else if (pointIndex < points.length - 1) {
-                    pointIndex++;  // Move to next bullet point
-                    typePoint(points[pointIndex]);  // Start typing next bullet point
+                    pointIndex++;
+                    typePoint(points[pointIndex]);
                 }
             }
     
-            typeChar();  // Start typing characters of the current bullet point
+            typeChar();
         }
     
         if (points.length > 0) {
-            typePoint(points[pointIndex]);  // Start with the first bullet point
+            typePoint(points[pointIndex]);
         }
     }
     
