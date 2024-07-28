@@ -1,6 +1,8 @@
 margin = 70
 
 let clickCount = 0; 
+let skipAnimation = false;
+
 daily_quotes = []
 annual_quotes = []
 async function init() {
@@ -28,7 +30,12 @@ async function init() {
 
     document.body.addEventListener('click', function () {
         clickCount++;
-        handleLoad(clickCount);  // Call function to handle which visualization to load
+        if (clickCount % 2 === 0) {
+            skipAnimation = true;
+        } else {
+            skipAnimation = false;
+            handleLoad(clickCount);
+        }
     });
 }
 
@@ -39,12 +46,27 @@ async function handleLoad(clickCount) {
             await loadIntro();
             break;
         case 2:
+            break;
+        case 3:
             svg2 = d3.select('#svg2');
             await loadSVG2();
             break;
-        case 3:
+        case 4:
+            svg2.selectAll('.stock_gain').interrupt();
+            break;
+        case 5:
             svg3 = d3.select('#svg3');
-            loadSVG3();
+            await loadSVG3();
+            break;
+        case 7:
+            let div4 = d3.select('#outtro-container'); // Assuming 'outtro-container' is your div4
+            div4.html(''); // Clear previous content if necessary
+            div4.append('a')
+                .attr('href', 'https://www.nvidia.com')
+                .attr('target', '_blank') // Opens link in a new tab
+                .text('Visit NVIDIA’s Official Site')
+                .style('font-size', '20px')
+                .style('color', '#0078D4');
             break;
     }
 }

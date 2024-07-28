@@ -52,9 +52,14 @@ li {
     stroke-width: 2px;
 }
 
-.chart-title {
+.svg2-title {
     font-size: 30px;
     fill: green;
+    font-weight: bold;
+}
+
+.tooltip {
+    font-size: 20px;
     font-weight: bold;
 }
 

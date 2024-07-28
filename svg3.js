@@ -43,6 +43,9 @@ async function loadSVG3() {
         .attr("d", area([]))
 
     for (let i = 100; i <= daily_quotes.length; i++) {
+        if (skipAnimation) {
+            i = daily_quotes.length - 1;
+        }
         let currentData = daily_quotes.slice(i - 1260 > 0 ? i - 1260 : 0, i);
 
         dateScale.domain(d3.extent(currentData, d => d.date));
@@ -50,8 +53,8 @@ async function loadSVG3() {
 
         // Update the path with the current data
         path.datum(currentData)
-            .transition()  // Start a transition to animate the area drawing
-            .duration(1)  // Duration of each segment's animation
+            .transition()
+            .duration(1)
             .attr("d", area);
 
         // Update the axis
