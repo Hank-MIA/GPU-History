@@ -3,7 +3,7 @@ async function loadSVG3() {
     var width = svg3.node().clientWidth - 2 * margin
 
     var drawing = svg3.append("g")
-        .attr("transform", "translate(" + margin + "," + margin + ")");
+        .attr("transform", "translate(" + 40 + "," + margin + ")");
     
     drawing.append("text")
         .attr("x", width / 2)

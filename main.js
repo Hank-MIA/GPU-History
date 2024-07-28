@@ -46,16 +46,16 @@ async function handleLoad(clickCount) {
             await loadIntro();
             break;
         case 3:
+            svg3 = d3.select('#svg3');
+            await loadSVG3();
+            break;
+        case 5:
             svg2 = d3.select('#svg2');
             await loadSVG2();
             break;
-        case 4:
+        case 6:
             svg2.selectAll('.stock_gain').interrupt();
             d3.selectAll('.stock_gain').attr('width', function (d) { return svg2dateAxis(d.end) - svg2dateAxis(d.begin); });
-            break;
-        case 5:
-            svg3 = d3.select('#svg3');
-            await loadSVG3();
             break;
         case 7:
             let div4 = d3.select('#outtro-container'); // Assuming 'outtro-container' is your div4

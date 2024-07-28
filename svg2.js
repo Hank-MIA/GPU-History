@@ -44,7 +44,7 @@ async function loadSVG2() {
         .attr("x", width / 2)
         .attr("text-anchor", "middle")
         .attr("class", "tooltip")
-        .style("opacity", 0);
+        .text("(Mouse over the bars to see details)");
 
     drawing.selectAll('.stock_gain')
         .data(annual_quotes)
@@ -61,16 +61,13 @@ async function loadSVG2() {
                 .style('filter', 'brightness(200%)')
             tooltip.transition()
                 .duration(200)
-                .style("opacity", .9);
             tooltip.text("Year: " + d.end.getFullYear() + "  Growth: " + d.growth.toFixed(0) + "%")
                 .attr("fill", d.growth >= 0 ? 'green' : '#a10d34')
+                .style('filter', 'brightness(150%)')
         })
         .on("mouseout", function (d, i) {
             drawing.selectAll('.stock_gain').filter(function(data, index) { return index === i; })
                 .style('filter', 'brightness(100%)')
-            tooltip.transition()
-                .duration(500)
-                .style("opacity", 0);
         })
         .transition()
         .duration(3000)

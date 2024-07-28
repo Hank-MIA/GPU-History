@@ -1,5 +1,5 @@
 async function loadIntro() {
-
+    intro_container.html("");
     intro_container.append("h1")
         .text("NVIDIA Stock Trend Visualization")
         .style("text-align", "center");
