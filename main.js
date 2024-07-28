@@ -34,8 +34,8 @@ async function init() {
             skipAnimation = true;
         } else {
             skipAnimation = false;
-            handleLoad(clickCount);
         }
+        handleLoad(clickCount);
     });
 }
 
@@ -45,14 +45,13 @@ async function handleLoad(clickCount) {
             intro_container = d3.select('#intro-container');
             await loadIntro();
             break;
-        case 2:
-            break;
         case 3:
             svg2 = d3.select('#svg2');
             await loadSVG2();
             break;
         case 4:
             svg2.selectAll('.stock_gain').interrupt();
+            d3.selectAll('.stock_gain').attr('width', function (d) { return svg2dateAxis(d.end) - svg2dateAxis(d.begin); });
             break;
         case 5:
             svg3 = d3.select('#svg3');
@@ -64,9 +63,15 @@ async function handleLoad(clickCount) {
             div4.append('a')
                 .attr('href', 'https://www.nvidia.com')
                 .attr('target', '_blank') // Opens link in a new tab
-                .text('Visit NVIDIA’s Official Site')
-                .style('font-size', '20px')
-                .style('color', '#0078D4');
+                .append('img')
+                .attr('src', 'logo.png') // URL of the NVIDIA logo
+                .attr('alt', 'NVIDIA Logo')
+                .style('width', '80%') // Adjust size as needed
+                .style('height', 'auto')
+                .style('display', 'block')
+                .style('margin', 'auto'); // Centers the image
+            break;
+        default:
             break;
     }
 }

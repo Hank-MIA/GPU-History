@@ -12,12 +12,12 @@ async function loadSVG2() {
         .attr("class", "svg2-title")
         .text("Compund Annual Growth Rate: " + cagr.toFixed(0) + "%");
 
-    var dateAxis = d3.scaleTime()
+    svg2dateAxis = d3.scaleTime()
         .domain(d3.extent(daily_quotes, function (d) { return d.date; }))
         .range([0, width]);
     drawing.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(dateAxis))
+        .call(d3.axisBottom(svg2dateAxis))
         .attr('class', 'axis');
 
     var growthAxis = d3.scaleLinear()
@@ -50,7 +50,7 @@ async function loadSVG2() {
         .data(annual_quotes)
         .enter()
         .append('rect')
-        .attr('x', function (d) { return dateAxis(d.begin); })
+        .attr('x', function (d) { return svg2dateAxis(d.begin); })
         .attr('y', function (d) { return growthAxis(Math.max(0, d.growth)); })
         .attr('width', 0)
         .attr('height', function (d) { return Math.abs(growthAxis(d.growth) - growthAxis(0)); })
@@ -74,5 +74,5 @@ async function loadSVG2() {
         })
         .transition()
         .duration(3000)
-        .attr('width', function (d) { return dateAxis(d.end) - dateAxis(d.begin); });
+        .attr('width', function (d) { return svg2dateAxis(d.end) - svg2dateAxis(d.begin); });
 }

@@ -68,3 +68,10 @@ li {
     fill: rgb(22, 68, 129);
     font-weight: bold;
 }
+
+#outtro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
